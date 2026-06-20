@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>◊ FallEstateOnboard · sovereign UK estate + letting agent AML + Right-to-Rent + referencing</title>
+<meta name="description" content="Sovereign UK estate/letting agent client onboarding: AML CDD (MLR 2017 £10k EUR threshold), Right-to-Rent (Immigration Act 2014), tenant referencing, guarantor capture, CMP-scheme firm setup, vulnerable customer (FCA shaped), audit chain. IDB-only · single HTML file.">
+<meta name="prime" content="887">
+<meta name="theme-color" content="#0b0a0f">
+<meta name="application-name" content="FallEstateOnboard">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%230b0a0f' rx='10'/><text x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23b8974a'>%E2%97%8A</text></svg>">
+<link rel="manifest" href='data:application/manifest+json,{"name":"FallEstateOnboard","short_name":"estateonboard","start_url":"./","display":"standalone","orientation":"any","background_color":"%230b0a0f","theme_color":"%23b8974a","description":"Sovereign UK estate/letting agent AML + Right-to-Rent + referencing onboarding","icons":[{"src":"data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 192 192%27><rect width=%27192%27 height=%27192%27 fill=%27%230b0a0f%27 rx=%2728%27/><text x=%2796%27 y=%27138%27 font-family=%27Georgia, serif%27 font-size=%27124%27 font-weight=%27700%27 text-anchor=%27middle%27 fill=%27%23b8974a%27>%E2%97%8A</text></svg>","sizes":"192x192","type":"image/svg+xml","purpose":"any"}]}'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0b0a0f;--void-2:#13121a;--ink:#1a1922;--ink-2:#22212c;
+  --line:#2a2934;--line-soft:#1f1e28;
+  --cream:#e6e1d6;--cream-dim:#a8a395;--cream-muted:#6e6a5e;
+  --brass:#b8974a;--amber:#ff8c00;--ox:#8b1a1a;--ox-2:#5e1212;
+  --green:#4ade80;--red:#ef4444;--blue:#60a5fa;--yellow:#fbbf24;--violet:#a78bfa;
+  --serif:'Libre Baskerville',Georgia,ui-serif,serif;
+  --sans:'DM Sans','Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'IBM Plex Mono','SF Mono',ui-monospace,Menlo,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--void);color:var(--cream);font:14px/1.55 var(--sans);min-height:100dvh;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0.035;background-image:radial-gradient(circle at 25% 30%,var(--brass) 0,transparent 1px),radial-gradient(circle at 75% 70%,var(--cream) 0,transparent 1px);background-size:3px 3px,5px 5px;mix-blend-mode:overlay}
+button{font-family:inherit;cursor:pointer;background:transparent;border:none;color:inherit}
+input,textarea,select{font-family:inherit;background:var(--ink);border:1px solid var(--line);color:var(--cream);border-radius:3px;padding:8px 11px;outline:none;font-size:13px;width:100%}
+input:focus,textarea:focus,select:focus{border-color:var(--brass)}
+textarea{resize:vertical;min-height:60px;line-height:1.5}
+a{color:var(--brass);text-decoration:none}
+a:hover{color:var(--amber)}
+::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-track{background:var(--void)}::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}::-webkit-scrollbar-thumb:hover{background:var(--brass)}
+.app{min-height:100dvh;display:grid;grid-template-rows:auto 1fr;position:relative;z-index:1}
+header{display:flex;align-items:center;border-bottom:1px solid var(--line);background:var(--void-2);user-select:none;flex-wrap:wrap;min-height:52px}
+.brand{display:flex;align-items:center;gap:11px;padding:10px 18px;border-right:1px solid var(--line)}
+.brand .mark{width:30px;height:30px;background:linear-gradient(135deg,var(--brass),var(--amber));border-radius:5px;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:17px;color:var(--void)}
+.brand .name{font-family:var(--serif);font-weight:700;font-size:15px;letter-spacing:0.01em}
+.brand .seal{font-family:var(--mono);font-size:9px;color:var(--cream-muted);letter-spacing:0.18em;text-transform:uppercase;margin-top:1px}
+nav.tabs{display:flex;flex:1;overflow-x:auto;align-items:stretch}
+nav.tabs button{padding:0 18px;font-size:12px;color:var(--cream-dim);letter-spacing:0.04em;display:flex;align-items:center;gap:6px;border-right:1px solid var(--line-soft);height:52px;white-space:nowrap;border-top:2px solid transparent;font-weight:500}
+nav.tabs button:hover{background:var(--ink);color:var(--cream)}
+nav.tabs button.active{background:var(--ink);color:var(--brass);border-top-color:var(--brass)}
+nav.tabs .tcount{font-family:var(--mono);font-size:9px;color:var(--cream-muted);background:var(--ink-2);padding:1px 6px;border-radius:8px;margin-left:4px}
+.tools-r{display:flex;align-items:center;gap:6px;padding:0 14px;height:52px;border-left:1px solid var(--line);margin-left:auto}
+.tool-btn{padding:5px 11px;border-radius:3px;font-size:11px;color:var(--cream-dim);letter-spacing:0.06em;text-transform:uppercase;font-family:var(--mono);border:1px solid var(--line)}
+.tool-btn:hover{background:var(--ink);color:var(--cream);border-color:var(--brass)}
+.tool-btn.primary{background:var(--brass);color:var(--void);border-color:var(--brass);font-weight:600}
+.tool-btn.primary:hover{background:var(--amber);border-color:var(--amber)}
+main{padding:18px 22px 80px;overflow-y:auto;max-width:1280px;margin:0 auto;width:100%}
+@media (max-width:640px){main{padding:14px 12px 80px}.brand{padding:8px 12px}.brand .seal{display:none}nav.tabs button{padding:0 12px;font-size:11px}}
+.disclaimer{background:linear-gradient(180deg,rgba(139,26,26,0.18),rgba(139,26,26,0.08));border:1px solid var(--ox);border-left:3px solid var(--ox);border-radius:3px;padding:12px 16px;margin-bottom:18px;font-size:12px;color:var(--cream);line-height:1.5}
+.disclaimer strong{color:var(--brass);font-family:var(--serif)}
+.section-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;gap:14px;flex-wrap:wrap}
+.section-h h2{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:0.01em}
+.section-h .sub{font-family:var(--mono);font-size:11px;color:var(--cream-muted);letter-spacing:0.08em;text-transform:uppercase}
+.section-h .actions{display:flex;gap:6px;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:680px){.grid-2{grid-template-columns:1fr}}
+.card{background:var(--void-2);border:1px solid var(--line);border-radius:4px;padding:16px 18px}
+.card h3{font-family:var(--serif);font-size:15px;font-weight:700;margin-bottom:10px;color:var(--cream);letter-spacing:0.01em}
+.card h3 .meta{font-family:var(--mono);font-size:10px;color:var(--brass);letter-spacing:0.1em;margin-left:8px;font-weight:400}
+.kpi{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px dashed var(--line-soft);font-size:13px;gap:10px}
+.kpi:last-child{border-bottom:none}
+.kpi .l{color:var(--cream-dim)}
+.kpi .v{font-family:var(--mono);color:var(--cream);font-weight:500;text-align:right}
+.kpi .v.green{color:var(--green)}.kpi .v.red{color:var(--red)}.kpi .v.amber{color:var(--amber)}.kpi .v.brass{color:var(--brass)}.kpi .v.blue{color:var(--blue)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
+@media (max-width:520px){.row,.row3{grid-template-columns:1fr}}
+.field{margin-bottom:10px}
+.field label{display:block;font-family:var(--mono);font-size:10px;color:var(--cream-muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px}
+.field .hint{font-size:11px;color:var(--cream-muted);margin-top:4px;font-family:var(--mono);line-height:1.4}
+.field .req{color:var(--ox);margin-left:3px}
+.btn{padding:8px 15px;border:1px solid var(--brass);border-radius:3px;font-size:12px;color:var(--cream);background:transparent;letter-spacing:0.04em;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--amber);color:var(--amber)}
+.btn.primary{background:var(--brass);color:var(--void);border-color:var(--brass);font-weight:600}
+.btn.primary:hover{background:var(--amber);border-color:var(--amber);color:var(--void)}
+.btn.danger{border-color:var(--ox);color:var(--ox)}
+.btn.danger:hover{background:var(--ox);color:var(--cream);border-color:var(--ox)}
+.btn.ghost{border-color:var(--line);color:var(--cream-dim)}
+.btn.ghost:hover{border-color:var(--brass);color:var(--brass)}
+.btn.sm{padding:5px 10px;font-size:11px}
+.btn:disabled{opacity:0.45;cursor:not-allowed}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+th,td{padding:9px 11px;border-bottom:1px solid var(--line-soft);text-align:left;vertical-align:middle}
+th{color:var(--brass);font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;background:var(--void-2)}
+td.r{text-align:right;font-family:var(--mono)}
+tr.row-link{cursor:pointer}
+tr.row-link:hover td{background:var(--ink)}
+.tag{display:inline-block;padding:2px 8px;border-radius:11px;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;border:1px solid var(--brass);color:var(--brass);margin-right:4px;line-height:1.5}
+.tag.amber{border-color:var(--amber);color:var(--amber)}
+.tag.green{border-color:var(--green);color:var(--green)}
+.tag.red{border-color:var(--red);color:var(--red)}
+.tag.blue{border-color:var(--blue);color:var(--blue)}
+.tag.muted{border-color:var(--cream-muted);color:var(--cream-muted)}
+.tag.violet{border-color:var(--violet);color:var(--violet)}
+.tag.ox{border-color:var(--ox);color:var(--ox)}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chip{padding:5px 11px;border-radius:14px;border:1px solid var(--line);color:var(--cream-dim);font-size:11px;font-family:var(--mono);letter-spacing:0.04em;cursor:pointer;text-transform:lowercase;background:var(--void-2)}
+.chip:hover{border-color:var(--brass);color:var(--cream)}
+.chip.active{background:var(--brass);color:var(--void);border-color:var(--brass);font-weight:600}
+.wizard{max-width:760px;margin:0 auto}
+.wizard-steps{display:flex;gap:4px;margin-bottom:22px;overflow-x:auto;padding-bottom:6px}
+.wstep{flex:1 1 0;min-width:62px;padding:6px 6px;background:var(--void-2);border:1px solid var(--line);border-radius:3px;font-size:9px;color:var(--cream-muted);text-align:center;font-family:var(--mono);letter-spacing:0.04em;text-transform:uppercase;cursor:pointer}
+.wstep.done{border-color:var(--green);color:var(--green)}
+.wstep.active{background:var(--brass);color:var(--void);border-color:var(--brass);font-weight:600}
+.wstep .n{font-size:13px;display:block;font-weight:600}
+.wizard-body{background:var(--void-2);border:1px solid var(--line);border-radius:4px;padding:22px;min-height:420px}
+.wizard-body h3{font-family:var(--serif);font-size:18px;margin-bottom:6px;color:var(--brass)}
+.wizard-body .step-sub{color:var(--cream-dim);font-size:12px;margin-bottom:18px;font-style:italic}
+.wizard-foot{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+.dz{border:2px dashed var(--line);border-radius:6px;padding:24px;text-align:center;background:var(--ink);transition:0.18s;cursor:pointer}
+.dz:hover,.dz.hover{border-color:var(--brass);background:var(--ink-2)}
+.dz .icon{font-size:32px;color:var(--brass);font-family:var(--serif)}
+.dz .label{font-family:var(--mono);font-size:11px;color:var(--cream-dim);letter-spacing:0.08em;text-transform:uppercase;margin-top:8px}
+.doc-list{margin-top:14px;display:flex;flex-direction:column;gap:7px}
+.doc-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--ink);border:1px solid var(--line);border-radius:3px;font-size:12px;flex-wrap:wrap}
+.doc-row .dtype{font-family:var(--mono);font-size:10px;color:var(--brass);text-transform:uppercase;padding:2px 6px;border:1px solid var(--brass);border-radius:2px}
+.doc-row .dname{flex:1;color:var(--cream);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:120px}
+.doc-row .dmeta{font-family:var(--mono);font-size:10px;color:var(--cream-muted)}
+.doc-row .dhash{font-family:var(--mono);font-size:9px;color:var(--cream-muted);max-width:120px;overflow:hidden;text-overflow:ellipsis}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.78);display:flex;align-items:center;justify-content:center;z-index:200;padding:14px;animation:fadein 0.18s}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.modal{background:var(--void-2);border:1px solid var(--brass);border-radius:5px;max-width:760px;width:100%;max-height:92vh;overflow-y:auto}
+.modal-h{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--void-2);z-index:1}
+.modal-h h3{font-family:var(--serif);font-size:16px;color:var(--brass)}
+.modal-b{padding:18px 22px 22px}
+.modal-close{font-family:var(--mono);font-size:14px;color:var(--cream-dim);padding:4px 10px;border:1px solid var(--line);border-radius:3px}
+.modal-close:hover{color:var(--ox);border-color:var(--ox)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--void-2);border:1px solid var(--brass);color:var(--cream);padding:9px 16px;border-radius:3px;font-size:12px;opacity:0;transition:opacity 0.22s,bottom 0.22s;font-family:var(--mono);letter-spacing:0.04em;z-index:300;pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,0.5)}
+.toast.show{opacity:1;bottom:30px}
+.chat{display:flex;flex-direction:column;gap:10px;max-height:58vh;overflow-y:auto;padding:6px;margin-bottom:8px}
+.msg{padding:11px 15px;border-radius:6px;max-width:88%;font-size:13px;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+.msg.user{background:var(--ink);align-self:flex-end;border-bottom-right-radius:2px}
+.msg.bot{background:var(--void-2);border:1px solid var(--line);border-left:2px solid var(--brass);align-self:flex-start;border-bottom-left-radius:2px}
+.msg.bot .src{font-family:var(--mono);font-size:10px;color:var(--cream-muted);letter-spacing:0.08em;margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)}
+.chat-input{display:flex;gap:8px;margin-top:10px}
+.chat-input input{flex:1;padding:11px 14px}
+.audit-entry{padding:8px 11px;border-left:2px solid var(--brass);background:var(--ink);margin-bottom:5px;font-family:var(--mono);font-size:11px;border-radius:0 3px 3px 0}
+.audit-entry .a-action{color:var(--brass);font-weight:600}
+.audit-entry .a-meta{color:var(--cream-muted);font-size:10px;margin-top:2px}
+.audit-entry .a-reason{color:var(--cream-dim);margin-top:3px;font-family:var(--sans);font-style:italic}
+.cd-grid{display:grid;grid-template-columns:280px 1fr;gap:18px;margin-top:8px}
+@media (max-width:840px){.cd-grid{grid-template-columns:1fr}}
+.cd-side{background:var(--void-2);border:1px solid var(--line);border-radius:4px;padding:14px}
+.cd-side .who{font-family:var(--serif);font-size:17px;color:var(--cream);margin-bottom:4px}
+.cd-side .sub{font-family:var(--mono);font-size:11px;color:var(--cream-muted);margin-bottom:10px;letter-spacing:0.04em}
+.cd-side .actions{display:flex;flex-direction:column;gap:6px;margin-top:14px}
+.cd-side .actions .btn{justify-content:center;text-align:center}
+.cd-body{display:flex;flex-direction:column;gap:14px}
+.banner{padding:10px 14px;border-radius:3px;font-size:12px;line-height:1.55;border:1px solid;margin-bottom:14px}
+.banner.warn{border-color:var(--amber);background:rgba(255,140,0,0.08);color:var(--cream)}
+.banner.info{border-color:var(--blue);background:rgba(96,165,250,0.06);color:var(--cream)}
+.banner.success{border-color:var(--green);background:rgba(74,222,128,0.06);color:var(--cream)}
+.banner.danger{border-color:var(--ox);background:rgba(139,26,26,0.12);color:var(--cream)}
+.empty{text-align:center;padding:60px 20px;color:var(--cream-muted)}
+.empty .big{font-family:var(--serif);font-size:22px;color:var(--brass);margin-bottom:8px}
+.empty .small{font-size:13px;margin-bottom:20px}
+.dash-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px}
+.dash-kpi{background:var(--void-2);border:1px solid var(--line);border-radius:4px;padding:14px 16px}
+.dash-kpi .n{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--brass);line-height:1.1}
+.dash-kpi .l{font-family:var(--mono);font-size:10px;color:var(--cream-muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px}
+.dash-kpi.due .n{color:var(--ox)}
+.dash-kpi.warn .n{color:var(--amber)}
+.dash-kpi.ok .n{color:var(--green)}
+.divider{height:1px;background:var(--line);margin:18px 0}
+input[type=checkbox]{width:auto;margin-right:8px;vertical-align:middle;accent-color:var(--brass)}
+input[type=radio]{width:auto;margin-right:6px;accent-color:var(--brass)}
+.help-pill{display:inline-block;padding:1px 7px;border-radius:8px;background:var(--ink);color:var(--cream-muted);font-family:var(--mono);font-size:10px;margin-left:6px;border:1px solid var(--line);cursor:help}
+.foot{text-align:center;padding:30px 12px 12px;font-family:var(--mono);font-size:10px;color:var(--cream-muted);letter-spacing:0.08em}
+.role-card{padding:14px;background:var(--ink);border:1px solid var(--line);border-radius:4px;cursor:pointer;text-align:center;transition:0.18s}
+.role-card:hover{border-color:var(--brass)}
+.role-card.sel{border-color:var(--brass);background:var(--ink-2);box-shadow:0 0 0 1px var(--brass)}
+.role-card .ic{font-family:var(--serif);font-size:22px;color:var(--brass);margin-bottom:6px}
+.role-card .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--cream)}
+.role-card .desc{font-size:11px;color:var(--cream-muted);margin-top:5px}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand">
+    <div class="mark">&#9674;</div>
+    <div>
+      <div class="name" id="brandName">FallEstateOnboard</div>
+      <div class="seal" id="brandSeal">SOVEREIGN · ESTATE · R2R · AML · P887</div>
+    </div>
+  </div>
+  <nav class="tabs" id="nav"></nav>
+  <div class="tools-r">
+    <button class="tool-btn" id="tierBadge" onclick="openModal('settings')">T0</button>
+    <button class="tool-btn" onclick="openModal('audit')">audit</button>
+    <button class="tool-btn primary" onclick="newClient()">+ client</button>
+  </div>
+</header>
+<main id="view"></main>
+</div>
+<div id="modalRoot"></div>
+<div class="toast" id="toast"></div>
+<script>
+'use strict';
+const TOOLNAME='fallestateonboard',VERSION='1.0.0',PRIME=887,STORE='fallestateonboard-v1';
+const TABS=[
+  {id:'dashboard',name:'Dashboard',ico:'◐'},
+  {id:'clients',name:'Clients',ico:'◊'},
+  {id:'firm',name:'Firm',ico:'⌂'},
+  {id:'agents',name:'Agents',ico:'△'},
+  {id:'help',name:'Q & A',ico:'?'},
+];
+const CLIENT_TYPES=['buyer','seller','landlord','tenant'];
+const DOC_TYPES=[
+  {id:'passport',label:'Passport',expiry:10*365},
+  {id:'driving-licence',label:'Driving Licence',expiry:10*365},
+  {id:'biometric-card',label:'Biometric Residence Card',expiry:10*365},
+  {id:'share-code',label:'Home Office Share Code',expiry:90},
+  {id:'utility-bill',label:'Utility Bill (3 months)',expiry:90},
+  {id:'bank-statement',label:'Bank Statement',expiry:90},
+  {id:'council-tax',label:'Council Tax Bill',expiry:365},
+  {id:'employer-letter',label:'Employer Reference',expiry:90},
+  {id:'landlord-ref',label:'Previous Landlord Reference',expiry:90},
+  {id:'payslips',label:'Payslips (3 months)',expiry:90},
+  {id:'guarantor-id',label:'Guarantor ID',expiry:365},
+  {id:'other',label:'Other',expiry:365},
+];
+const RTR_DOCS=['passport','biometric-card','share-code'];
+const HIGH_RISK_JURIS=['AF','BY','BI','CF','CD','CU','GN','GW','HT','IR','IQ','KP','LA','LB','LY','ML','MM','MZ','NI','PK','RU','SO','SS','SD','SY','TZ','VE','YE','ZW'];
+const CMP_SCHEMES=['DPS','MyDeposits','TDS'];
+
+let state={active:'dashboard',brandName:'FallEstateOnboard',
+  firm:null,agents:[],clients:[],audit:[],
+  ui:{filter:'all',search:'',selectedClientId:null,activeAgentId:null,wizard:null,chat:[],clientSubtab:'overview'},
+  settings:{anthropicKey:'',auditChain:true,autoBroadcast:true},
+};
+
+const $=(s,p=document)=>p.querySelector(s);
+const $$=(s,p=document)=>Array.from(p.querySelectorAll(s));
+const uid=(p='id')=>p+'_'+Math.random().toString(36).slice(2,11);
+const now=()=>Date.now();
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const moneyP=n=>'£'+(+n||0).toLocaleString('en-GB',{minimumFractionDigits:2,maximumFractionDigits:2});
+const dateStr=ts=>{if(!ts)return '—';return new Date(ts).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})};
+const dateTime=ts=>{if(!ts)return '—';return new Date(ts).toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})};
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._to);t._to=setTimeout(()=>t.classList.remove('show'),1900)}
+async function sha256(s){const buf=new TextEncoder().encode(s);const h=await crypto.subtle.digest('SHA-256',buf);return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('')}
+
+let db;
+function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open(STORE,1);r.onupgradeneeded=e=>{const d=e.target.result;['state','audit','clients','agents','firms','documents'].forEach(s=>{if(!d.objectStoreNames.contains(s))d.createObjectStore(s,{keyPath:s==='state'?undefined:'id'})})};r.onsuccess=e=>{db=e.target.result;res(db)};r.onerror=rej})}
+function idbGetAll(s){return new Promise(res=>{const tx=db.transaction(s,'readonly');const q=tx.objectStore(s).getAll();q.onsuccess=()=>res(q.result||[]);q.onerror=()=>res([])})}
+function idbGet(s,k){return new Promise(res=>{const tx=db.transaction(s,'readonly');const q=tx.objectStore(s).get(k);q.onsuccess=()=>res(q.result);q.onerror=()=>res(null)})}
+function idbPut(s,v,k){return new Promise(res=>{const tx=db.transaction(s,'readwrite');const o=tx.objectStore(s);const q=k!=null?o.put(v,k):o.put(v);q.onsuccess=()=>res(true);q.onerror=()=>res(false)})}
+
+async function loadAll(){
+  if(!db)await openDB();
+  const[firms,agents,clients,auditArr,uiState]=await Promise.all([idbGetAll('firms'),idbGetAll('agents'),idbGetAll('clients'),idbGetAll('audit'),idbGet('state','ui')]);
+  state.firm=firms[0]||null;state.agents=agents;state.clients=clients;
+  state.audit=auditArr.sort((a,b)=>a.i-b.i);
+  if(uiState){state.ui=Object.assign({},state.ui,uiState.value||{});state.brandName=uiState.brand||'FallEstateOnboard';state.settings=Object.assign({},state.settings,uiState.settings||{});}
+}
+async function persistUI(){if(!db)await openDB();await idbPut('state',{value:{...state.ui,wizard:null},brand:state.brandName,settings:state.settings},'ui')}
+
+async function auditLog(action,opts={}){
+  if(!state.settings.auditChain)return;
+  const prev=state.audit.length?state.audit[state.audit.length-1]:null;
+  const prevHash=prev?prev.docHash:'';const i=(prev?prev.i:0)+1;
+  const entry={id:uid('au'),i,ts:now(),tool:TOOLNAME,adviserId:opts.adviserId||'',clientId:opts.clientId||'',action,reasoning:opts.reasoning||'',configVersion:TOOLNAME+'@'+VERSION,prevHash,docHash:'',payload:opts.payload||{}};
+  entry.docHash=await sha256(JSON.stringify({i,ts:entry.ts,action,clientId:entry.clientId,prevHash,payload:entry.payload}));
+  state.audit.push(entry);await idbPut('audit',entry);
+}
+
+let bcEstate,bcSignal;
+function initMesh(){
+  try{bcSignal=new BroadcastChannel('fall-signal');bcSignal.postMessage({source:TOOLNAME,type:'hello',prime:PRIME,version:VERSION,ts:now()});bcSignal.addEventListener('message',e=>{if(e.data?.type==='ping')bcSignal.postMessage({source:TOOLNAME,type:'pong',prime:PRIME})})}catch(e){}
+  try{bcEstate=new BroadcastChannel('fall-estate');bcEstate.addEventListener('message',async e=>{const m=e.data;if(!m||m.source===TOOLNAME)return;if(m.type==='sync.request')bcEstate.postMessage({v:1,type:'sync.snapshot',ts:now(),source:TOOLNAME,payload:{clients:state.clients,agents:state.agents,firm:state.firm}});});bcEstate.postMessage({v:1,type:'sync.request',ts:now(),source:TOOLNAME})}catch(e){}
+}
+
+function newClientRec(){
+  return {
+    id:uid('cl'),firmId:state.firm?state.firm.id:'',ts:now(),updatedAt:now(),archivedAt:null,
+    clientType:'tenant',title:'Mr',firstName:'',lastName:'',dob:'',nationality:'GB',phone:'',email:'',
+    address:'',postcode:'',
+    employer:'',annualIncome:0,
+    propertyAddress:'',propertyPostcode:'',rent:0,tenancyStart:'',tenancyEnd:'',tenancyType:'AST',
+    aml:{idVerified:false,addressVerified:false,sourceOfFunds:'',sanctionsChecked:false,pepStatus:false,riskGrade:'low',riskReasons:[],cddComplete:false,notes:''},
+    rtr:{checked:false,documentType:'',shareCode:'',expiryDate:'',followUpDate:'',rightConfirmed:false,restrictedUntil:'',notes:''},
+    referencing:{creditCheck:false,employerRef:false,landlordRef:false,affordabilityCheck:false,guarantorRequired:false,guarantorName:'',guarantorRelationship:'',guarantorIncome:0,notes:''},
+    vulnerable:{identified:false,category:'',details:'',adjustments:''},
+    deposit:{amount:0,scheme:'',schemeRef:'',protectedDate:'',returnDue:''},
+    documents:[],
+    status:'new',agentId:'',isDemo:false,
+  };
+}
+
+function clientDisplayName(c){return ((c.title?c.title+' ':'')+(c.firstName||'')+' '+(c.lastName||'')).trim()||'Unnamed';}
+
+function assessAmlRisk(c){
+  const aml=c.aml||{};let score=0;const reasons=[];
+  if(aml.pepStatus){score+=3;reasons.push('PEP');}
+  if(!aml.sanctionsChecked){score+=1;reasons.push('sanctions unchecked');}
+  const nat=(c.nationality||'').toUpperCase();if(HIGH_RISK_JURIS.includes(nat)){score+=3;reasons.push('high-risk nationality');}
+  if(c.rent>5000){score+=1;reasons.push('high rent >£5k');}
+  if(c.clientType==='buyer'&&c.aml?.sourceOfFunds==='overseas'){score+=2;reasons.push('overseas source');}
+  return {grade:score>=5?'high':score>=2?'medium':'low',score,reasons};
+}
+
+async function saveClient(c,action,reasoning){
+  c.updatedAt=now();const risk=assessAmlRisk(c);c.aml.riskGrade=risk.grade;c.aml.riskReasons=risk.reasons;
+  const idx=state.clients.findIndex(x=>x.id===c.id);if(idx>=0)state.clients[idx]=c;else state.clients.push(c);
+  await idbPut('clients',c);await auditLog(action||'client.updated',{clientId:c.id,reasoning:reasoning||''});
+}
+async function saveFirm(f){f.updatedAt=now();state.firm=f;await idbPut('firms',f);await auditLog('firm.updated');}
+async function saveAgent(a){a.updatedAt=now();const idx=state.agents.findIndex(x=>x.id===a.id);if(idx>=0)state.agents[idx]=a;else state.agents.push(a);await idbPut('agents',a);await auditLog('agent.updated',{payload:{agentId:a.id}});}
+
+function render(){renderTabs();const v=$('#view');
+  if(state.ui.wizard){renderWizard(v);return;}
+  switch(state.active){
+    case 'dashboard':return renderDashboard(v);case 'clients':return state.ui.selectedClientId?renderClientDetail(v):renderClientList(v);
+    case 'firm':return renderFirm(v);case 'agents':return renderAgents(v);case 'help':return renderHelp(v);
+  }
+}
+function renderTabs(){$('#nav').innerHTML=TABS.map(t=>`<button class="${state.active===t.id?'active':''}" onclick="switchTab('${t.id}')">${t.ico} ${t.name}</button>`).join('');}
+function switchTab(id){state.active=id;state.ui.selectedClientId=null;state.ui.wizard=null;persistUI();render();}
+
+function renderDashboard(v){
+  const cls=state.clients.filter(c=>!c.archivedAt);
+  const tenants=cls.filter(c=>c.clientType==='tenant');const buyers=cls.filter(c=>c.clientType==='buyer');
+  const rtrDue=tenants.filter(c=>!c.rtr?.rightConfirmed).length;
+  const amlDue=cls.filter(c=>!c.aml?.cddComplete).length;
+  const refDue=tenants.filter(c=>!c.referencing?.creditCheck).length;
+  const vuln=cls.filter(c=>c.vulnerable?.identified).length;
+  const highRisk=cls.filter(c=>c.aml?.riskGrade==='high').length;
+  v.innerHTML=`
+    <div class="disclaimer"><strong>◆ Regulatory notice:</strong> FallEstateOnboard assists with MLR 2017 AML CDD, Immigration Act 2014 Right-to-Rent checks, and tenant referencing. It does not replace the agent's professional judgment or legal obligations. Retain records per HMRC/Home Office requirements. Data never leaves this device.</div>
+    <div class="section-h"><h2>Dashboard</h2><div class="sub">fallestateonboard · prime 887</div></div>
+    <div class="dash-kpis">
+      <div class="dash-kpi"><div class="n">${cls.length}</div><div class="l">Total clients</div></div>
+      <div class="dash-kpi"><div class="n">${tenants.length}</div><div class="l">Tenants</div></div>
+      <div class="dash-kpi"><div class="n">${buyers.length}</div><div class="l">Buyers</div></div>
+      <div class="dash-kpi ${rtrDue?'warn':'ok'}"><div class="n">${rtrDue}</div><div class="l">RTR due</div></div>
+      <div class="dash-kpi ${amlDue?'due':''}"><div class="n">${amlDue}</div><div class="l">AML incomplete</div></div>
+      <div class="dash-kpi ${refDue?'warn':''}"><div class="n">${refDue}</div><div class="l">Ref incomplete</div></div>
+      <div class="dash-kpi"><div class="n">${vuln}</div><div class="l">Vulnerable</div></div>
+      <div class="dash-kpi ${highRisk?'due':''}"><div class="n">${highRisk}</div><div class="l">High risk</div></div>
+    </div>`;
+}
+
+function renderClientList(v){
+  const filter=state.ui.filter||'all';
+  let cls=state.clients.filter(c=>!c.archivedAt);
+  if(filter!=='all')cls=cls.filter(c=>filter==='aml-due'?!c.aml?.cddComplete:filter==='rtr-due'?c.clientType==='tenant'&&!c.rtr?.rightConfirmed:filter==='high-risk'?c.aml?.riskGrade==='high':c.clientType===filter);
+  const q=(state.ui.search||'').toLowerCase();if(q)cls=cls.filter(c=>clientDisplayName(c).toLowerCase().includes(q));
+  cls.sort((a,b)=>b.updatedAt-a.updatedAt);
+  v.innerHTML=`
+    <div class="section-h"><h2>Clients</h2><div class="sub">${cls.length} shown</div></div>
+    <div class="chip-row">${['all','tenant','buyer','seller','landlord','aml-due','rtr-due','high-risk'].map(f=>`<button class="chip ${filter===f?'active':''}" onclick="state.ui.filter='${f}';render()">${f}</button>`).join('')}</div>
+    <div class="field" style="max-width:400px;margin-bottom:14px"><input placeholder="Search…" value="${esc(state.ui.search||'')}" oninput="state.ui.search=this.value;render()"></div>
+    ${cls.length?`<table><thead><tr><th>Name</th><th>Type</th><th>Status</th><th>AML</th><th>RTR</th><th>Updated</th></tr></thead><tbody>${cls.map(c=>`<tr class="row-link" onclick="openClient('${c.id}')"><td>${esc(clientDisplayName(c))}${c.isDemo?' <span class="tag muted">demo</span>':''}</td><td>${esc(c.clientType)}</td><td><span class="tag ${c.status==='complete'?'green':c.status==='in-progress'?'amber':'muted'}">${c.status}</span></td><td><span class="tag ${c.aml?.riskGrade==='high'?'red':c.aml?.riskGrade==='medium'?'amber':'green'}">${c.aml?.riskGrade||'—'}</span></td><td>${c.clientType==='tenant'?c.rtr?.rightConfirmed?'<span class="tag green">ok</span>':'<span class="tag amber">due</span>':'—'}</td><td>${dateStr(c.updatedAt)}</td></tr>`).join('')}</tbody></table>`:'<div class="empty"><div class="big">No matching clients</div></div>'}`;
+}
+
+function openClient(id){state.ui.selectedClientId=id;state.active='clients';state.ui.clientSubtab='overview';render();}
+function renderClientDetail(v){
+  const c=state.clients.find(x=>x.id===state.ui.selectedClientId);if(!c){state.ui.selectedClientId=null;renderClientList(v);return;}
+  const sub=state.ui.clientSubtab||'overview';
+  v.innerHTML=`
+    <div style="margin-bottom:14px"><button class="btn ghost sm" onclick="state.ui.selectedClientId=null;render()">← Back</button></div>
+    <div class="section-h"><h2>${esc(clientDisplayName(c))}</h2><div class="actions">
+      <button class="btn primary sm" onclick="resumeWizard('${c.id}')">Edit</button>
+      <button class="btn ghost sm" onclick="archiveClient('${c.id}')">Archive</button>
+    </div></div>
+    <div class="subtab-row">${['overview','aml','rtr','referencing','vulnerable','deposit','documents'].map(t=>`<div class="subtab ${sub===t?'active':''}" onclick="state.ui.clientSubtab='${t}';render()">${t}</div>`).join('')}</div>
+    ${sub==='overview'?renderOverview(c):''}${sub==='aml'?renderAml(c):''}${sub==='rtr'?renderRtr(c):''}
+    ${sub==='referencing'?renderRef(c):''}${sub==='vulnerable'?renderVuln(c):''}
+    ${sub==='deposit'?renderDeposit(c):''}${sub==='documents'?renderDocs(c):''}`;
+}
+function renderOverview(c){
+  return `<div class="grid-2">
+    <div class="card"><h3>Details</h3>
+      <div class="kpi"><span class="l">Type</span><span class="v">${esc(c.clientType)}</span></div>
+      <div class="kpi"><span class="l">Name</span><span class="v">${esc(c.title)} ${esc(c.firstName)} ${esc(c.lastName)}</span></div>
+      <div class="kpi"><span class="l">DOB</span><span class="v">${esc(c.dob)}</span></div>
+      <div class="kpi"><span class="l">Nationality</span><span class="v">${esc(c.nationality)}</span></div>
+      <div class="kpi"><span class="l">Phone</span><span class="v">${esc(c.phone)}</span></div>
+      <div class="kpi"><span class="l">Email</span><span class="v">${esc(c.email)}</span></div>
+    </div>
+    <div class="card"><h3>Status</h3>
+      <div class="kpi"><span class="l">Status</span><span class="v">${esc(c.status)}</span></div>
+      <div class="kpi"><span class="l">AML risk</span><span class="v ${c.aml?.riskGrade==='high'?'red':c.aml?.riskGrade==='medium'?'amber':'green'}">${c.aml?.riskGrade}</span></div>
+      <div class="kpi"><span class="l">CDD complete</span><span class="v ${c.aml?.cddComplete?'green':'red'}">${c.aml?.cddComplete?'Yes':'No'}</span></div>
+      ${c.clientType==='tenant'?`<div class="kpi"><span class="l">Right to Rent</span><span class="v ${c.rtr?.rightConfirmed?'green':'red'}">${c.rtr?.rightConfirmed?'Confirmed':'Pending'}</span></div>`:''}
+      <div class="kpi"><span class="l">Documents</span><span class="v">${(c.documents||[]).length}</span></div>
+    </div>
+    ${c.clientType==='tenant'?`<div class="card"><h3>Tenancy</h3>
+      <div class="kpi"><span class="l">Property</span><span class="v">${esc(c.propertyAddress)}</span></div>
+      <div class="kpi"><span class="l">Rent</span><span class="v">${moneyP(c.rent)}/pcm</span></div>
+      <div class="kpi"><span class="l">Start</span><span class="v">${esc(c.tenancyStart)}</span></div>
+      <div class="kpi"><span class="l">Type</span><span class="v">${esc(c.tenancyType)}</span></div>
+    </div>`:''}
+  </div>`;
+}
+function renderAml(c){const a=c.aml||{};const risk=assessAmlRisk(c);
+  return `<div class="card"><h3>AML CDD (MLR 2017)</h3>
+    <div class="kpi"><span class="l">ID verified</span><span class="v ${a.idVerified?'green':'red'}">${a.idVerified?'Yes':'No'}</span></div>
+    <div class="kpi"><span class="l">Address verified</span><span class="v ${a.addressVerified?'green':'red'}">${a.addressVerified?'Yes':'No'}</span></div>
+    <div class="kpi"><span class="l">Source of funds</span><span class="v">${esc(a.sourceOfFunds)}</span></div>
+    <div class="kpi"><span class="l">Sanctions checked</span><span class="v ${a.sanctionsChecked?'green':'red'}">${a.sanctionsChecked?'Yes':'No'}</span></div>
+    <div class="kpi"><span class="l">PEP</span><span class="v ${a.pepStatus?'red':''}">${a.pepStatus?'Yes':'No'}</span></div>
+    <div class="kpi"><span class="l">Risk grade</span><span class="v ${risk.grade==='high'?'red':risk.grade==='medium'?'amber':'green'}">${risk.grade} (${risk.score})</span></div>
+    ${risk.reasons.length?`<div style="margin-top:6px">${risk.reasons.map(r=>`<span class="tag amber">${esc(r)}</span>`).join(' ')}</div>`:''}
+    <div class="kpi"><span class="l">CDD complete</span><span class="v ${a.cddComplete?'green':'red'}">${a.cddComplete?'Yes':'No'}</span></div>
+  </div>`;
+}
+function renderRtr(c){const r=c.rtr||{};
+  return `<div class="card"><h3>Right to Rent (Immigration Act 2014)</h3>
+    ${c.clientType!=='tenant'?'<p style="color:var(--cream-dim);font-size:12px">RTR checks apply to tenants only.</p>':`
+    <div class="kpi"><span class="l">Check completed</span><span class="v ${r.checked?'green':'red'}">${r.checked?'Yes':'No'}</span></div>
+    <div class="kpi"><span class="l">Document type</span><span class="v">${esc(r.documentType)}</span></div>
+    <div class="kpi"><span class="l">Share code</span><span class="v">${esc(r.shareCode)}</span></div>
+    <div class="kpi"><span class="l">Right confirmed</span><span class="v ${r.rightConfirmed?'green':'red'}">${r.rightConfirmed?'Yes':'No'}</span></div>
+    ${r.restrictedUntil?`<div class="kpi"><span class="l">Time-limited until</span><span class="v amber">${esc(r.restrictedUntil)}</span></div>`:''}
+    ${r.followUpDate?`<div class="kpi"><span class="l">Follow-up date</span><span class="v">${esc(r.followUpDate)}</span></div>`:''}
+    <div class="kpi"><span class="l">Notes</span><span class="v">${esc(r.notes)}</span></div>`}
+  </div>`;
+}
+function renderRef(c){const r=c.referencing||{};
+  return `<div class="card"><h3>Tenant Referencing</h3>
+    <div class="kpi"><span class="l">Credit check</span><span class="v ${r.creditCheck?'green':'red'}">${r.creditCheck?'Done':'Pending'}</span></div>
+    <div class="kpi"><span class="l">Employer ref</span><span class="v ${r.employerRef?'green':'red'}">${r.employerRef?'Done':'Pending'}</span></div>
+    <div class="kpi"><span class="l">Landlord ref</span><span class="v ${r.landlordRef?'green':'red'}">${r.landlordRef?'Done':'Pending'}</span></div>
+    <div class="kpi"><span class="l">Affordability</span><span class="v ${r.affordabilityCheck?'green':'red'}">${r.affordabilityCheck?'Done':'Pending'}</span></div>
+    <div class="kpi"><span class="l">Guarantor required</span><span class="v">${r.guarantorRequired?'Yes':'No'}</span></div>
+    ${r.guarantorRequired?`<div class="kpi"><span class="l">Guarantor</span><span class="v">${esc(r.guarantorName)} (${esc(r.guarantorRelationship)})</span></div><div class="kpi"><span class="l">Guarantor income</span><span class="v">${moneyP(r.guarantorIncome)}</span></div>`:''}
+  </div>`;
+}
+function renderVuln(c){const v=c.vulnerable||{};
+  return `<div class="card"><h3>Vulnerable Customer</h3>
+    <div class="kpi"><span class="l">Identified</span><span class="v ${v.identified?'amber':''}">${v.identified?'Yes':'No'}</span></div>
+    ${v.identified?`<div class="kpi"><span class="l">Category</span><span class="v">${esc(v.category)}</span></div>
+    <div class="kpi"><span class="l">Details</span><span class="v">${esc(v.details)}</span></div>
+    <div class="kpi"><span class="l">Adjustments</span><span class="v">${esc(v.adjustments)}</span></div>`:''}
+  </div>`;
+}
+function renderDeposit(c){const d=c.deposit||{};
+  return `<div class="card"><h3>Tenancy Deposit</h3>
+    ${c.clientType!=='tenant'?'<p style="color:var(--cream-dim);font-size:12px">Deposit protection applies to tenants only.</p>':`
+    <div class="kpi"><span class="l">Amount</span><span class="v">${moneyP(d.amount)}</span></div>
+    <div class="kpi"><span class="l">Scheme</span><span class="v">${esc(d.scheme)}</span></div>
+    <div class="kpi"><span class="l">Scheme ref</span><span class="v">${esc(d.schemeRef)}</span></div>
+    <div class="kpi"><span class="l">Protected date</span><span class="v">${esc(d.protectedDate)}</span></div>`}
+  </div>`;
+}
+function renderDocs(c){const docs=c.documents||[];
+  return `<div class="card"><h3>Documents <span class="meta">${docs.length}</span></h3>
+    ${docs.length?`<div class="doc-list">${docs.map(d=>{const expired=d.expiresAt&&d.expiresAt<now();return `<div class="doc-row"><span class="dtype">${esc(d.type)}</span><span class="dname">${esc(d.name)}</span><span class="dmeta">${expired?'<span class="tag red">expired</span>':dateStr(d.expiresAt)}</span><span class="dhash">${esc(d.sha256)}</span></div>`;}).join('')}</div>`:'<p style="color:var(--cream-dim);font-size:12px">No documents uploaded.</p>'}
+  </div>`;
+}
+
+async function archiveClient(id){if(!confirm('Archive?'))return;const c=state.clients.find(x=>x.id===id);if(!c)return;c.archivedAt=now();await saveClient(c,'client.archived');state.ui.selectedClientId=null;toast('Archived');render();}
+
+// WIZARD
+const WIZ_STEPS=[{id:'type',name:'Type'},{id:'details',name:'Details'},{id:'contact',name:'Contact'},
+  {id:'tenancy',name:'Tenancy'},{id:'aml',name:'AML'},{id:'rtr',name:'RTR'},
+  {id:'referencing',name:'Referencing'},{id:'vulnerable',name:'Vulnerable'},{id:'deposit',name:'Deposit'},{id:'documents',name:'Docs'}];
+
+function newClient(){const c=newClientRec();c.agentId=state.ui.activeAgentId||'';state.ui.wizard={clientId:c.id,step:0,client:c,fresh:true};render();}
+function resumeWizard(id){const c=state.clients.find(x=>x.id===id);if(!c)return;state.ui.wizard={clientId:c.id,step:0,client:JSON.parse(JSON.stringify(c)),fresh:false};render();}
+
+function getSteps(c){
+  let steps=[...WIZ_STEPS];
+  if(c.clientType!=='tenant')steps=steps.filter(s=>!['tenancy','rtr','referencing','deposit'].includes(s.id));
+  return steps;
+}
+
+function renderWizard(v){
+  const w=state.ui.wizard;if(!w)return;const steps=getSteps(w.client);const cur=steps[w.step]||steps[0];
+  v.innerHTML=`<div class="wizard"><div class="wizard-steps">${steps.map((s,i)=>`<div class="wstep ${i<w.step?'done':''} ${i===w.step?'active':''}" onclick="jumpStep(${i})"><span class="n">${i+1}</span>${s.name}</div>`).join('')}</div><div class="wizard-body" id="wizBody"></div><div class="wizard-foot"><button class="btn ghost" onclick="${w.step>0?'prevStep()':'cancelWizard()'}">${w.step>0?'← Back':'Cancel'}</button><button class="btn primary" onclick="${w.step<steps.length-1?'nextStep()':'commitWizard()'}">${w.step<steps.length-1?'Next →':'Commit'}</button></div></div>`;
+  renderStep(cur.id,w.client);
+}
+
+function renderStep(id,c){
+  const b=$('#wizBody');if(!b)return;
+  switch(id){
+    case 'type':b.innerHTML=`<h3>Client Type</h3><div class="step-sub">What type of client is this?</div><div class="field"><label>Type</label><select id="wType">${CLIENT_TYPES.map(t=>`<option value="${t}" ${c.clientType===t?'selected':''}>${t}</option>`).join('')}</select></div>`;break;
+    case 'details':b.innerHTML=`<h3>Personal Details</h3><div class="row"><div class="field"><label>Title</label><select id="wTitle">${['Mr','Mrs','Ms','Miss','Dr'].map(t=>`<option ${c.title===t?'selected':''}>${t}</option>`).join('')}</select></div><div class="field"><label>First name<span class="req">*</span></label><input id="wFirst" value="${esc(c.firstName)}"></div></div><div class="row"><div class="field"><label>Last name<span class="req">*</span></label><input id="wLast" value="${esc(c.lastName)}"></div><div class="field"><label>DOB</label><input type="date" id="wDob" value="${esc(c.dob)}"></div></div><div class="row"><div class="field"><label>Nationality</label><input id="wNat" value="${esc(c.nationality)}"></div><div class="field"><label>Employer</label><input id="wEmp" value="${esc(c.employer)}"></div></div><div class="field"><label>Annual income</label><input type="number" id="wIncome" value="${c.annualIncome||0}"></div>`;break;
+    case 'contact':b.innerHTML=`<h3>Contact</h3><div class="row"><div class="field"><label>Phone</label><input id="wPhone" value="${esc(c.phone)}"></div><div class="field"><label>Email</label><input type="email" id="wEmail" value="${esc(c.email)}"></div></div><div class="field"><label>Address</label><input id="wAddr" value="${esc(c.address)}"></div><div class="field"><label>Postcode</label><input id="wPost" value="${esc(c.postcode)}"></div>`;break;
+    case 'tenancy':b.innerHTML=`<h3>Tenancy Details</h3><div class="field"><label>Property address</label><input id="wPropAddr" value="${esc(c.propertyAddress)}"></div><div class="row"><div class="field"><label>Postcode</label><input id="wPropPost" value="${esc(c.propertyPostcode)}"></div><div class="field"><label>Monthly rent</label><input type="number" id="wRent" value="${c.rent||0}"></div></div><div class="row"><div class="field"><label>Start date</label><input type="date" id="wTenStart" value="${esc(c.tenancyStart)}"></div><div class="field"><label>End date</label><input type="date" id="wTenEnd" value="${esc(c.tenancyEnd)}"></div></div><div class="field"><label>Tenancy type</label><select id="wTenType">${['AST','Contractual','Company Let','HMO','Other'].map(t=>`<option ${c.tenancyType===t?'selected':''}>${t}</option>`).join('')}</select></div>`;break;
+    case 'aml':const am=c.aml;b.innerHTML=`<h3>AML CDD (MLR 2017)</h3><div class="step-sub">Estate/letting agents must conduct CDD for property transactions ≥€10,000</div>
+      <div style="margin-bottom:8px"><label style="font-size:13px"><input type="checkbox" id="wIdVer" ${am.idVerified?'checked':''}> ID verified</label></div>
+      <div style="margin-bottom:8px"><label style="font-size:13px"><input type="checkbox" id="wAddrVer" ${am.addressVerified?'checked':''}> Address verified</label></div>
+      <div class="field"><label>Source of funds</label><select id="wSoF"><option value="">—</option>${['savings','employment','inheritance','sale-of-property','overseas','other'].map(t=>`<option value="${t}" ${am.sourceOfFunds===t?'selected':''}>${t}</option>`).join('')}</select></div>
+      <div style="margin-bottom:8px"><label style="font-size:13px"><input type="checkbox" id="wSanChk" ${am.sanctionsChecked?'checked':''}> Sanctions checked</label></div>
+      <div style="margin-bottom:8px"><label style="font-size:13px"><input type="checkbox" id="wPep" ${am.pepStatus?'checked':''}> PEP</label></div>
+      <div style="margin-bottom:8px"><label style="font-size:13px"><input type="checkbox" id="wCddDone" ${am.cddComplete?'checked':''}> CDD complete</label></div>
+      <div class="field"><label>Notes</label><textarea id="wAmlNotes" rows="2">${esc(am.notes)}</textarea></div>`;break;
+    case 'rtr':const rr=c.rtr;b.innerHTML=`<h3>Right to Rent</h3><div class="step-sub">Immigration Act 2014 — check before granting tenancy</div>
+      <div style="margin-bottom:8px"><label style="font-size:13px"><input type="checkbox" id="wRtrChk" ${rr.checked?'checked':''}> Check completed</label></div>
+      <div class="field"><label>Document type</label><select id="wRtrDoc"><option value="">—</option>${['UK/Irish passport','EU Settlement Scheme','Biometric Residence Permit','Home Office share code','Right to Rent letter','Other'].map(t=>`<option ${rr.documentType===t?'selected':''}>${t}</option>`).join('')}</select></div>
+      <div class="field"><label>Share code (if applicable)</label><input id="wShareCode" value="${esc(rr.shareCode)}"></div>
+      <div style="margin-bottom:8px"><label style="font-size:13px"><input type="checkbox" id="wRtrOk" ${rr.rightConfirmed?'checked':''}> Right to rent confirmed</label></div>
+      <div class="row"><div class="field"><label>Time-limited until</label><input type="date" id="wRtrLimit" value="${esc(rr.restrictedUntil)}"></div><div class="field"><label>Follow-up date</label><input type="date" id="wRtrFollow" value="${esc(rr.followUpDate)}"></div></div>
+      <div class="field"><label>Notes</label><textarea id="wRtrNotes" rows="2">${esc(rr.notes)}</textarea></div>`;break;
+    case 'referencing':const rf=c.referencing;b.innerHTML=`<h3>Tenant Referencing</h3>
+      <div style="margin-bottom:8px"><label style="font-size:13px"><input type="checkbox" id="wRefCredit" ${rf.creditCheck?'checked':''}> Credit check completed</label></div>
+      <div style="margin-bottom:8px"><label style="font-size:13px"><input type="checkbox" id="wRefEmp" ${rf.employerRef?'checked':''}> Employer reference obtained</label></div>
+      <div style="margin-bottom:8px"><label style="font-size:13px"><input type="checkbox" id="wRefLl" ${rf.landlordRef?'checked':''}> Previous landlord reference obtained</label></div>
+      <div style="margin-bottom:8px"><label style="font-size:13px"><input type="checkbox" id="wRefAff" ${rf.affordabilityCheck?'checked':''}> Affordability check completed</label></div>
+      <div style="margin-bottom:10px"><label style="font-size:13px"><input type="checkbox" id="wRefGuar" ${rf.guarantorRequired?'checked':''}> Guarantor required</label></div>
+      <div id="guarFields" style="display:${rf.guarantorRequired?'block':'none'}">
+        <div class="row"><div class="field"><label>Guarantor name</label><input id="wGuarName" value="${esc(rf.guarantorName)}"></div><div class="field"><label>Relationship</label><input id="wGuarRel" value="${esc(rf.guarantorRelationship)}"></div></div>
+        <div class="field"><label>Guarantor annual income</label><input type="number" id="wGuarInc" value="${rf.guarantorIncome||0}"></div>
+      </div>`;
+      setTimeout(()=>{const cb=$('#wRefGuar');if(cb)cb.addEventListener('change',()=>{const gf=$('#guarFields');if(gf)gf.style.display=cb.checked?'block':'none';});},50);break;
+    case 'vulnerable':const vu=c.vulnerable;b.innerHTML=`<h3>Vulnerable Customer</h3>
+      <div style="margin-bottom:10px"><label style="font-size:13px"><input type="checkbox" id="wVulnId" ${vu.identified?'checked':''}> Vulnerability identified</label></div>
+      <div id="vulnFields" style="display:${vu.identified?'block':'none'}">
+        <div class="field"><label>Category</label><select id="wVulnCat"><option value="">—</option>${['health','life-event','resilience','capability'].map(t=>`<option value="${t}" ${vu.category===t?'selected':''}>${t}</option>`).join('')}</select></div>
+        <div class="field"><label>Details</label><textarea id="wVulnDetails" rows="2">${esc(vu.details)}</textarea></div>
+        <div class="field"><label>Adjustments</label><textarea id="wVulnAdj" rows="2">${esc(vu.adjustments)}</textarea></div>
+      </div>`;
+      setTimeout(()=>{const cb=$('#wVulnId');if(cb)cb.addEventListener('change',()=>{const vf=$('#vulnFields');if(vf)vf.style.display=cb.checked?'block':'none';});},50);break;
+    case 'deposit':const dp=c.deposit;b.innerHTML=`<h3>Tenancy Deposit</h3><div class="step-sub">Housing Act 2004 — protect within 30 days of receipt</div>
+      <div class="row"><div class="field"><label>Deposit amount</label><input type="number" id="wDepAmt" value="${dp.amount||0}"></div><div class="field"><label>Scheme</label><select id="wDepScheme"><option value="">—</option>${CMP_SCHEMES.map(s=>`<option ${dp.scheme===s?'selected':''}>${s}</option>`).join('')}</select></div></div>
+      <div class="row"><div class="field"><label>Scheme reference</label><input id="wDepRef" value="${esc(dp.schemeRef)}"></div><div class="field"><label>Protected date</label><input type="date" id="wDepDate" value="${esc(dp.protectedDate)}"></div></div>`;break;
+    case 'documents':b.innerHTML=`<h3>Document Capture</h3>
+      <div class="dz" id="dropZone" onclick="document.getElementById('fileInput').click()"><div class="icon">△</div><div class="label">Drop files or click to upload</div></div>
+      <input type="file" id="fileInput" style="display:none" multiple onchange="handleFiles(this.files)">
+      <div class="row" style="margin-top:10px"><div class="field"><label>Document type</label><select id="wDocType">${DOC_TYPES.map(d=>`<option value="${d.id}">${d.label}</option>`).join('')}</select></div></div>
+      <div class="doc-list" id="wizDocList">${(c.documents||[]).map(d=>`<div class="doc-row"><span class="dtype">${esc(d.type)}</span><span class="dname">${esc(d.name)}</span><span class="dhash">${esc(d.sha256)}</span></div>`).join('')}</div>`;
+      setTimeout(()=>{const dz=$('#dropZone');if(dz){dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('hover');});dz.addEventListener('dragleave',()=>dz.classList.remove('hover'));dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('hover');handleFiles(e.dataTransfer.files);});}},50);break;
+  }
+}
+
+async function handleFiles(files){
+  if(!files||!files.length)return;const w=state.ui.wizard;if(!w)return;
+  const docType=$('#wDocType')?.value||'other';
+  for(const file of files){
+    const buf=await file.arrayBuffer();const hash=await sha256(new TextDecoder().decode(new Uint8Array(buf).slice(0,1024)));
+    const meta={id:uid('doc'),clientId:w.clientId,type:docType,name:file.name,size:file.size,sha256:hash.slice(0,16),uploadedAt:now(),expiresAt:null};
+    const dt=DOC_TYPES.find(d=>d.id===docType);if(dt)meta.expiresAt=now()+dt.expiry*86400000;
+    w.client.documents.push(meta);
+  }
+  toast(files.length+' file(s) captured');
+  const list=$('#wizDocList');if(list)list.innerHTML=w.client.documents.map(d=>`<div class="doc-row"><span class="dtype">${esc(d.type)}</span><span class="dname">${esc(d.name)}</span><span class="dhash">${esc(d.sha256)}</span></div>`).join('');
+}
+
+function collectStep(id,c){
+  switch(id){
+    case 'type':c.clientType=$('#wType')?.value||'tenant';break;
+    case 'details':c.title=$('#wTitle')?.value||'';c.firstName=$('#wFirst')?.value.trim()||'';c.lastName=$('#wLast')?.value.trim()||'';c.dob=$('#wDob')?.value||'';c.nationality=$('#wNat')?.value.trim()||'GB';c.employer=$('#wEmp')?.value.trim()||'';c.annualIncome=parseFloat($('#wIncome')?.value)||0;break;
+    case 'contact':c.phone=$('#wPhone')?.value.trim()||'';c.email=$('#wEmail')?.value.trim()||'';c.address=$('#wAddr')?.value.trim()||'';c.postcode=$('#wPost')?.value.trim()||'';break;
+    case 'tenancy':c.propertyAddress=$('#wPropAddr')?.value.trim()||'';c.propertyPostcode=$('#wPropPost')?.value.trim()||'';c.rent=parseFloat($('#wRent')?.value)||0;c.tenancyStart=$('#wTenStart')?.value||'';c.tenancyEnd=$('#wTenEnd')?.value||'';c.tenancyType=$('#wTenType')?.value||'AST';break;
+    case 'aml':c.aml.idVerified=$('#wIdVer')?.checked||false;c.aml.addressVerified=$('#wAddrVer')?.checked||false;c.aml.sourceOfFunds=$('#wSoF')?.value||'';c.aml.sanctionsChecked=$('#wSanChk')?.checked||false;c.aml.pepStatus=$('#wPep')?.checked||false;c.aml.cddComplete=$('#wCddDone')?.checked||false;c.aml.notes=$('#wAmlNotes')?.value.trim()||'';break;
+    case 'rtr':c.rtr.checked=$('#wRtrChk')?.checked||false;c.rtr.documentType=$('#wRtrDoc')?.value||'';c.rtr.shareCode=$('#wShareCode')?.value.trim()||'';c.rtr.rightConfirmed=$('#wRtrOk')?.checked||false;c.rtr.restrictedUntil=$('#wRtrLimit')?.value||'';c.rtr.followUpDate=$('#wRtrFollow')?.value||'';c.rtr.notes=$('#wRtrNotes')?.value.trim()||'';break;
+    case 'referencing':c.referencing.creditCheck=$('#wRefCredit')?.checked||false;c.referencing.employerRef=$('#wRefEmp')?.checked||false;c.referencing.landlordRef=$('#wRefLl')?.checked||false;c.referencing.affordabilityCheck=$('#wRefAff')?.checked||false;c.referencing.guarantorRequired=$('#wRefGuar')?.checked||false;if(c.referencing.guarantorRequired){c.referencing.guarantorName=$('#wGuarName')?.value.trim()||'';c.referencing.guarantorRelationship=$('#wGuarRel')?.value.trim()||'';c.referencing.guarantorIncome=parseFloat($('#wGuarInc')?.value)||0;}break;
+    case 'vulnerable':c.vulnerable.identified=$('#wVulnId')?.checked||false;if(c.vulnerable.identified){c.vulnerable.category=$('#wVulnCat')?.value||'';c.vulnerable.details=$('#wVulnDetails')?.value.trim()||'';c.vulnerable.adjustments=$('#wVulnAdj')?.value.trim()||'';}break;
+    case 'deposit':c.deposit.amount=parseFloat($('#wDepAmt')?.value)||0;c.deposit.scheme=$('#wDepScheme')?.value||'';c.deposit.schemeRef=$('#wDepRef')?.value.trim()||'';c.deposit.protectedDate=$('#wDepDate')?.value||'';break;
+  }
+}
+
+function nextStep(){const w=state.ui.wizard;if(!w)return;const steps=getSteps(w.client);collectStep(steps[w.step].id,w.client);if(w.step<steps.length-1){w.step++;render();}}
+function prevStep(){const w=state.ui.wizard;if(!w)return;const steps=getSteps(w.client);collectStep(steps[w.step].id,w.client);if(w.step>0){w.step--;render();}}
+function jumpStep(i){const w=state.ui.wizard;if(!w)return;const steps=getSteps(w.client);collectStep(steps[w.step].id,w.client);w.step=i;render();}
+function cancelWizard(){if(!confirm('Cancel?'))return;state.ui.wizard=null;render();}
+
+async function commitWizard(){
+  const w=state.ui.wizard;if(!w)return;const steps=getSteps(w.client);collectStep(steps[w.step].id,w.client);
+  const c=w.client;if(!c.firstName||!c.lastName){toast('Name required');return;}
+  c.status=c.aml?.cddComplete&&(c.clientType!=='tenant'||c.rtr?.rightConfirmed)?'complete':'in-progress';
+  c.agentId=state.ui.activeAgentId||'';
+  await saveClient(c,w.fresh?'client.created':'client.updated',w.fresh?'wizard commit':'wizard update');
+  state.ui.wizard=null;state.ui.selectedClientId=c.id;state.active='clients';toast('Client committed');persistUI();render();
+}
+
+// FIRM
+function renderFirm(v){const f=state.firm||{};
+  v.innerHTML=`<div class="section-h"><h2>Firm Setup</h2></div><div class="card" style="max-width:620px">
+    <div class="row"><div class="field"><label>Firm name</label><input id="fName" value="${esc(f.name||'')}"></div><div class="field"><label>HMRC AML ref</label><input id="fAml" value="${esc(f.hmrcAmlRef||'')}"></div></div>
+    <div class="field"><label>Address</label><input id="fAddr" value="${esc(f.address||'')}"></div>
+    <div class="row"><div class="field"><label>Email</label><input id="fEmail" value="${esc(f.email||'')}"></div><div class="field"><label>Phone</label><input id="fPhone" value="${esc(f.phone||'')}"></div></div>
+    <div class="row"><div class="field"><label>CMP scheme</label><select id="fCmp"><option value="">—</option>${CMP_SCHEMES.map(s=>`<option ${f.cmpScheme===s?'selected':''}>${s}</option>`).join('')}</select></div><div class="field"><label>Property Redress</label><select id="fRedress"><option value="">—</option>${['PRS','TPOS'].map(s=>`<option ${f.redressScheme===s?'selected':''}>${s}</option>`).join('')}</select></div></div>
+    <button class="btn primary" onclick="saveFirmForm()" style="margin-top:8px">Save</button>
+  </div>`;
+}
+async function saveFirmForm(){const f=state.firm||{id:uid('firm'),ts:now()};f.name=$('#fName').value.trim();f.hmrcAmlRef=$('#fAml').value.trim();f.address=$('#fAddr').value.trim();f.email=$('#fEmail').value.trim();f.phone=$('#fPhone').value.trim();f.cmpScheme=$('#fCmp').value;f.redressScheme=$('#fRedress').value;await saveFirm(f);toast('Firm saved');render();}
+
+// AGENTS
+function renderAgents(v){
+  v.innerHTML=`<div class="section-h"><h2>Agents / Negotiators</h2><div class="actions"><button class="btn primary sm" onclick="openModal('addagent')">+ Agent</button></div></div>
+    ${state.agents.length?state.agents.map(a=>`<div class="card" style="max-width:620px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:center"><div><strong>${esc(a.name)}</strong> <span style="font-family:var(--mono);font-size:10px;color:var(--cream-muted)">${esc(a.role||'negotiator')}</span></div><button class="btn sm ghost" onclick="setActiveAgent('${a.id}')">${state.ui.activeAgentId===a.id?'✓ Active':'Set active'}</button></div></div>`).join(''):'<div class="empty" style="max-width:620px"><div class="small">No agents. Add one to get started.</div></div>'}`;
+}
+function setActiveAgent(id){state.ui.activeAgentId=id;persistUI();toast('Active agent set');render();}
+
+// Q&A
+const T0_RULES=[
+  {q:/aml|money launder|cdd/i,a:'Under MLR 2017, estate and letting agents must conduct CDD for all property transactions where rent is ≥€10,000/year or sale price is any amount. Verify identity (passport/driving licence), verify address (utility bill/bank statement), assess source of funds for buyers, screen sanctions, and check PEP status. Enhanced due diligence for high-risk clients. Report suspicious activity to NCA via SAR.'},
+  {q:/right.?to.?rent|rtr|immigration/i,a:'Immigration Act 2014 requires landlords and their agents to check prospective tenants have the right to rent in the UK before granting a tenancy. Acceptable documents: UK/Irish passport, EU Settlement Scheme status, Biometric Residence Permit, or Home Office online share code. Checks must be done before tenancy starts. For time-limited right, set follow-up check before expiry. Civil penalty for non-compliance: up to £20,000 per occupier.'},
+  {q:/deposit|protect|dps|tds/i,a:'Housing Act 2004 (as amended) requires tenancy deposits for ASTs in England and Wales to be protected in an authorised scheme (DPS, MyDeposits, or TDS) within 30 days of receipt. The prescribed information must be served on the tenant within 30 days. Failure to protect: tenant can claim 1-3x the deposit amount. Cannot serve a valid s.21 notice if deposit not protected.'},
+  {q:/referenc|credit|afford|guarantor/i,a:'Tenant referencing typically includes: credit check (adverse credit, CCJs, insolvency), employer reference (confirming employment and salary), previous landlord reference (conduct, rent payment history), and affordability assessment (rent should typically be ≤35-40% of gross income). If affordability is marginal, a guarantor may be required — guarantor income should typically be 3x+ the annual rent.'},
+  {q:/redress|complaint|prs|tpos/i,a:'All property agents in England must belong to a government-approved redress scheme: PRS (The Property Redress Scheme) or TPOS (The Property Ombudsman). Civil penalty up to £5,000 for non-membership. Agents must display membership details prominently. Complaints procedure must be in writing and provided to clients.'},
+  {q:/cmp|client money|protection/i,a:'Letting agents holding client money (rent, deposits, maintenance funds) must belong to a Client Money Protection (CMP) scheme. Required under the Tenant Fees Act 2019 and Client Money Protection Schemes for Property Agents Regulations 2019. Display CMP certificate prominently. Failure: unlimited fine.'},
+  {q:/fee|tenant fees act/i,a:'Tenant Fees Act 2019 (England) prohibits most fees to tenants. Permitted payments only: rent, tenancy deposit (capped at 5 weeks for rent <£50k/yr), holding deposit (capped at 1 week), early termination (capped at rent owed), and changes to tenancy requested by tenant (capped at £50). Breach: fine up to £30,000 or criminal offence for repeat.'},
+  {q:/vulnerab/i,a:'While not FCA-regulated, estate and letting agents should identify vulnerable customers (elderly, disability, language barriers, financial difficulty) and make reasonable adjustments. Document vulnerability, adjustments made, and communication preferences. Consider whether additional support or time is needed for decision-making.'},
+  {q:/energy|epc|mees/i,a:'Minimum Energy Efficiency Standards (MEES): rental properties must have EPC rating of E or above. Landlords cannot let a property with F or G rating unless a valid exemption is registered. EPC must be provided to prospective tenants before viewing. Valid for 10 years.'},
+  {q:/sanction|pep/i,a:'Under MLR 2017, agents must screen clients against the HM Treasury sanctions list. PEP (Politically Exposed Person) status requires enhanced due diligence. Sanctions match = report to NCA immediately and do not proceed. PEP = proceed with enhanced scrutiny of source of funds and ongoing monitoring.'},
+];
+function askT0(q){for(const r of T0_RULES){if(r.q.test(q))return {answer:r.a,source:'T0 · estate/letting agent rules'};}return null;}
+async function askT3(q){if(!state.settings.anthropicKey)return null;try{const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'x-api-key':state.settings.anthropicKey,'anthropic-version':'2023-06-01','content-type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,messages:[{role:'user',content:'You are a UK estate and letting agent regulatory expert. Answer concisely.\n\n'+q}]})});if(!res.ok)return null;const json=await res.json();return {answer:json.content?.[0]?.text,source:'T3 · Anthropic'};}catch(e){return null;}}
+
+function renderHelp(v){
+  v.innerHTML=`<div class="section-h"><h2>Estate Agent Q & A</h2><div class="sub">T0 + T3 BYOK</div></div>
+    <p style="font-size:12px;color:var(--cream-dim);margin-bottom:14px">Ask about AML CDD, Right to Rent, deposit protection, tenant referencing, redress schemes, CMP, tenant fees, vulnerability, EPC/MEES, sanctions/PEP.</p>
+    <div class="card" style="max-width:780px"><div class="chat" id="chatBox">${(state.ui.chat||[]).map(m=>`<div class="msg ${m.role}">${esc(m.text)}${m.source?`<div class="src">${esc(m.source)}</div>`:''}</div>`).join('')}</div>
+    <div class="chat-input"><input id="chatIn" placeholder="Ask…" onkeydown="if(event.key==='Enter')askQuestion()"><button class="btn primary" onclick="askQuestion()">Ask</button></div></div>`;
+  const box=$('#chatBox');if(box)box.scrollTop=box.scrollHeight;
+}
+async function askQuestion(){const inp=$('#chatIn');if(!inp)return;const q=inp.value.trim();if(!q)return;inp.value='';if(!state.ui.chat)state.ui.chat=[];state.ui.chat.push({role:'user',text:q});render();let r=askT0(q);if(!r)r=await askT3(q);state.ui.chat.push(r?{role:'bot',text:r.answer,source:r.source}:{role:'bot',text:'No T0 match. Add a BYOK key in Settings for T3.',source:'system'});persistUI();render();}
+
+// MODALS
+function openModal(type){
+  const root=$('#modalRoot');
+  if(type==='settings'){root.innerHTML=`<div class="modal-bg" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modal-h"><h3>Settings</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="modal-b">
+    <div class="field"><label>Brand name</label><input id="sBrand" value="${esc(state.brandName)}"></div>
+    <div class="field"><label>Anthropic key (T3)</label><input id="sAnthro" type="password" value="${esc(state.settings.anthropicKey||'')}"></div>
+    <div style="margin:10px 0"><label style="font-size:12px"><input type="checkbox" id="sAudit" ${state.settings.auditChain?'checked':''}> Audit chain</label></div>
+    <div class="divider"></div>
+    <div style="display:flex;gap:8px"><button class="btn ghost sm" onclick="exportState()">Export</button><button class="btn ghost sm" onclick="importState()">Import</button><button class="btn danger sm" onclick="wipeState()">Wipe</button></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><button class="btn primary" onclick="saveSettingsModal()">Save</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>
+  </div></div></div>`;}
+  else if(type==='addagent'){root.innerHTML=`<div class="modal-bg" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modal-h"><h3>Add Agent</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="modal-b">
+    <div class="row"><div class="field"><label>Name</label><input id="aaName"></div><div class="field"><label>Role</label><input id="aaRole" value="negotiator"></div></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><button class="btn primary" onclick="saveNewAgent()">Add</button><button class="btn ghost" onclick="closeModal()">Cancel</button></div>
+  </div></div></div>`;}
+  else if(type==='audit'){const entries=state.audit.slice().reverse().slice(0,100);root.innerHTML=`<div class="modal-bg" onclick="if(event.target===this)closeModal()"><div class="modal" style="max-width:900px"><div class="modal-h"><h3>Audit · ${state.audit.length} entries</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="modal-b">${entries.map(e=>`<div class="audit-entry"><span class="a-action">${esc(e.action)}</span> <span class="a-meta">${dateTime(e.ts)}</span>${e.reasoning?`<div class="a-reason">${esc(e.reasoning)}</div>`:''}</div>`).join('')}</div></div></div>`;}
+}
+function closeModal(){$('#modalRoot').innerHTML='';}
+async function saveNewAgent(){const a={id:uid('agt'),firmId:state.firm?state.firm.id:'',ts:now(),updatedAt:now(),name:$('#aaName').value.trim(),role:$('#aaRole').value.trim()};if(!a.name){toast('Name required');return;}await saveAgent(a);if(!state.ui.activeAgentId)state.ui.activeAgentId=a.id;closeModal();toast('Agent added');render();}
+function saveSettingsModal(){state.brandName=$('#sBrand').value.trim()||'FallEstateOnboard';state.settings.anthropicKey=$('#sAnthro').value.trim();state.settings.auditChain=$('#sAudit').checked;$('#tierBadge').textContent=state.settings.anthropicKey?'T3':'T0';persistUI();closeModal();toast('Settings saved');render();}
+function exportState(){const d={tool:TOOLNAME,v:VERSION,ts:now(),firm:state.firm,agents:state.agents,clients:state.clients};const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='fallestateonboard-export.json';a.click();URL.revokeObjectURL(u);toast('Exported');}
+function importState(){const inp=document.createElement('input');inp.type='file';inp.accept='.json';inp.onchange=async()=>{const f=inp.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(d.firm){state.firm=d.firm;await idbPut('firms',d.firm);}for(const k of['agents','clients']){if(Array.isArray(d[k]))for(const r of d[k]){state[k].push(r);await idbPut(k,r);}}persistUI();toast('Imported');render();}catch(e){toast('Failed');}};inp.click();}
+async function wipeState(){if(!confirm('Wipe ALL data?'))return;if(!confirm('Sure?'))return;for(const s of['firms','agents','clients','audit','documents','state']){const tx=db.transaction(s,'readwrite');tx.objectStore(s).clear();await new Promise(r=>{tx.oncomplete=r;});}location.reload();}
+
+// DEMO
+async function seedDemoIfEmpty(){
+  if(state.clients.length||state.agents.length||state.firm)return;
+  const firmId=uid('firm');
+  const firm={id:firmId,name:'Demo Estates & Lettings',hmrcAmlRef:'XMLR00012345',address:'5 High Street, London SW1A 2AA',email:'info@demoestates.co.uk',phone:'020 7456 7890',cmpScheme:'DPS',redressScheme:'PRS',updatedAt:now(),isDemo:true};
+  state.firm=firm;await idbPut('firms',firm);
+  const agt={id:uid('agt'),firmId,name:'Demo Negotiator',role:'senior negotiator',updatedAt:now(),isDemo:true};
+  state.agents.push(agt);state.ui.activeAgentId=agt.id;await idbPut('agents',agt);
+
+  const t=newClientRec();t.isDemo=true;t.clientType='tenant';t.title='Ms';t.firstName='Emma';t.lastName='Clarke';t.dob='1994-06-12';t.nationality='GB';t.phone='07700 900789';t.email='emma.clarke@email.co.uk';t.address='18 Oak Road, London';t.postcode='SE1 4QR';t.employer='TechCorp Ltd';t.annualIncome=38000;t.propertyAddress='Flat 3, 22 Elm Street, London';t.propertyPostcode='SE1 5AB';t.rent=1400;t.tenancyStart='2026-07-01';t.tenancyType='AST';t.status='in-progress';
+  t.aml={idVerified:true,addressVerified:true,sourceOfFunds:'employment',sanctionsChecked:true,pepStatus:false,riskGrade:'low',riskReasons:[],cddComplete:true,notes:''};
+  t.rtr={checked:true,documentType:'UK/Irish passport',shareCode:'',rightConfirmed:true,restrictedUntil:'',followUpDate:'',notes:''};
+  t.referencing={creditCheck:true,employerRef:true,landlordRef:false,affordabilityCheck:true,guarantorRequired:false,guarantorName:'',guarantorRelationship:'',guarantorIncome:0,notes:''};
+  t.deposit={amount:1615,scheme:'DPS',schemeRef:'DPS-2026-789012',protectedDate:'2026-07-02'};
+  state.clients.push(t);await idbPut('clients',t);
+
+  const b=newClientRec();b.isDemo=true;b.clientType='buyer';b.title='Mr';b.firstName='Richard';b.lastName='Osei';b.dob='1985-11-03';b.nationality='GB';b.phone='07700 900456';b.email='r.osei@email.co.uk';b.address='12 Maple Ave, London';b.postcode='N1 2XY';b.annualIncome=75000;b.status='new';
+  b.aml={idVerified:true,addressVerified:false,sourceOfFunds:'savings',sanctionsChecked:false,pepStatus:false,riskGrade:'medium',riskReasons:['sanctions unchecked'],cddComplete:false,notes:''};
+  state.clients.push(b);await idbPut('clients',b);
+
+  await auditLog('demo.seeded',{reasoning:'first boot'});await persistUI();
+}
+
+// BOOT
+(async function boot(){
+  try{await openDB();await loadAll();await seedDemoIfEmpty();initMesh();$('#tierBadge').textContent=state.settings.anthropicKey?'T3':'T0';render();
+  }catch(e){console.error('[fallestateonboard] boot error:',e);document.getElementById('view').innerHTML='<div class="empty"><div class="big">Boot error</div><div class="small">'+esc(e.message)+'</div></div>';}
+})();
+</script>
+</body>
+</html>
