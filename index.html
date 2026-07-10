@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>◊ FallEstateOnboard · sovereign UK estate + letting agent AML + Right-to-Rent + referencing</title>
-<meta name="description" content="Sovereign UK estate/letting agent client onboarding: AML CDD (MLR 2017 £10k EUR threshold), Right-to-Rent (Immigration Act 2014), tenant referencing, guarantor capture, CMP-scheme firm setup, vulnerable customer (FCA shaped), audit chain. IDB-only · single HTML file.">
+<meta name="description" content="Sovereign UK estate/letting agent client onboarding: AML CDD (MLR 2017 TBAk EUR threshold), Right-to-Rent (Immigration Act 2014), tenant referencing, guarantor capture, CMP-scheme firm setup, vulnerable customer (FCA shaped), audit chain. IDB-only · single HTML file.">
 <meta name="prime" content="887">
 <meta name="theme-color" content="#0b0a0f">
 <meta name="application-name" content="FallEstateOnboard">
@@ -221,22 +221,19 @@ input[type=radio]{width:auto;margin-right:6px;accent-color:var(--brass)}
     'llama-3b':  { id: 'Llama-3.2-3B-Instruct-q4f16_1-MLC',   size: '~2GB',   label: '3B · balanced · default · most laptops' },
     'qwen-7b':   { id: 'Qwen2.5-7B-Instruct-q4f16_1-MLC',     size: '~5GB',   label: '7B · capable · needs decent GPU (M-series Mac / 8GB+ VRAM)' },
     'llama-8b':  { id: 'Llama-3.1-8B-Instruct-q4f16_1-MLC',   size: '~5GB',   label: '8B · common · needs decent GPU' },
-    'llama-70b': { id: 'Llama-3.1-70B-Instruct-q4f16_1-MLC',  size: '~40GB',  label: '70B · frontier · needs serious GPU + 64GB+ RAM' },
-  };
+    'llama-70b': { id: 'Llama-3.1-70B-Instruct-q4f16_1-MLC',  size: '~40GB',  label: '70B · frontier · needs serious GPU + 64GB+ RAM' }};
   const DEFAULT_MODEL = 'llama-3b';
 
   const T3_PROVIDERS = {
     anthropic: { label: 'Anthropic Claude', models: ['claude-sonnet-4-5','claude-opus-4-7','claude-haiku-4-5'], default: 'claude-sonnet-4-5', url: 'https://api.anthropic.com/v1/messages' },
     openai:    { label: 'OpenAI',           models: ['gpt-4o','gpt-4o-mini','o1-mini'],                          default: 'gpt-4o-mini',      url: 'https://api.openai.com/v1/chat/completions' },
-    google:    { label: 'Google Gemini',    models: ['gemini-1.5-pro','gemini-1.5-flash','gemini-2.0-flash-exp'], default: 'gemini-1.5-flash', url: 'https://generativelanguage.googleapis.com/v1beta/models/' },
-  };
+    google:    { label: 'Google Gemini',    models: ['gemini-1.5-pro','gemini-1.5-flash','gemini-2.0-flash-exp'], default: 'gemini-1.5-flash', url: 'https://generativelanguage.googleapis.com/v1beta/models/' }};
 
   // ─── State ───────────────────────────────────────────────────────
   const STATE = {
     config: loadConfig(),
     ai: { ready: false, loading: false, progress: 0, engine: null, model: null },
-    mesh: { active: false, peers: new Map(), bc: null, signal: null },
-  };
+    mesh: { active: false, peers: new Map(), bc: null, signal: null }};
 
   function loadConfig() {
     try { return JSON.parse(localStorage.getItem('fall-kit.config') || '{}'); }
@@ -303,8 +300,7 @@ input[type=radio]{width:auto;margin-right:6px;accent-color:var(--brass)}
     if (tier === 'T2' && STATE.ai.ready && STATE.ai.engine) {
       const r = await STATE.ai.engine.chat.completions.create({
         messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userMsg }],
-        max_tokens: maxTokens,
-      });
+        max_tokens: maxTokens});
       return r.choices[0].message.content;
     }
     if (tier === 'T3' && STATE.config.api_key && STATE.config.api_provider) {
@@ -321,8 +317,7 @@ input[type=radio]{width:auto;margin-right:6px;accent-color:var(--brass)}
       const r = await fetch(T3_PROVIDERS.anthropic.url, {
         method: 'POST',
         headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01' },
-        body: JSON.stringify({ model, max_tokens: maxTokens, system: sys, messages: [{ role: 'user', content: msg }] }),
-      });
+        body: JSON.stringify({ model, max_tokens: maxTokens, system: sys, messages: [{ role: 'user', content: msg }] })});
       if (!r.ok) throw new Error('Anthropic ' + r.status + ': ' + (await r.text()).slice(0, 200));
       const j = await r.json();
       return j.content[0].text;
@@ -331,8 +326,7 @@ input[type=radio]{width:auto;margin-right:6px;accent-color:var(--brass)}
       const r = await fetch(T3_PROVIDERS.openai.url, {
         method: 'POST',
         headers: { 'content-type': 'application/json', 'Authorization': 'Bearer ' + key },
-        body: JSON.stringify({ model, max_tokens: maxTokens, messages: [{ role: 'system', content: sys }, { role: 'user', content: msg }] }),
-      });
+        body: JSON.stringify({ model, max_tokens: maxTokens, messages: [{ role: 'system', content: sys }, { role: 'user', content: msg }] })});
       if (!r.ok) throw new Error('OpenAI ' + r.status);
       const j = await r.json();
       return j.choices[0].message.content;
@@ -341,8 +335,7 @@ input[type=radio]{width:auto;margin-right:6px;accent-color:var(--brass)}
       const r = await fetch(T3_PROVIDERS.google.url + model + ':generateContent?key=' + encodeURIComponent(key), {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: sys + '\n\n---\n\n' + msg }] }], generationConfig: { maxOutputTokens: maxTokens } }),
-      });
+        body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: sys + '\n\n---\n\n' + msg }] }], generationConfig: { maxOutputTokens: maxTokens } })});
       if (!r.ok) throw new Error('Google ' + r.status);
       const j = await r.json();
       return j.candidates[0].content.parts[0].text;
@@ -583,8 +576,7 @@ input[type=radio]{width:auto;margin-right:6px;accent-color:var(--brass)}
     openMint: openMint,  // v1.2 · launch kcc-mint with this seed prefilled as parent
     MODELS: WEBLLM_MODELS,
     PROVIDERS: T3_PROVIDERS,
-    state: STATE,
-  };
+    state: STATE};
 })(typeof window !== 'undefined' ? window : globalThis);
 
 </script>
@@ -627,8 +619,7 @@ const TABS=[
   {id:'clients',name:'Clients',ico:'◊'},
   {id:'firm',name:'Firm',ico:'⌂'},
   {id:'agents',name:'Agents',ico:'△'},
-  {id:'help',name:'Q & A',ico:'?'},
-];
+  {id:'help',name:'Q & A',ico:'?'}];
 const CLIENT_TYPES=['buyer','seller','landlord','tenant'];
 const DOC_TYPES=[
   {id:'passport',label:'Passport',expiry:10*365},
@@ -642,8 +633,7 @@ const DOC_TYPES=[
   {id:'landlord-ref',label:'Previous Landlord Reference',expiry:90},
   {id:'payslips',label:'Payslips (3 months)',expiry:90},
   {id:'guarantor-id',label:'Guarantor ID',expiry:365},
-  {id:'other',label:'Other',expiry:365},
-];
+  {id:'other',label:'Other',expiry:365}];
 const RTR_DOCS=['passport','biometric-card','share-code'];
 const HIGH_RISK_JURIS=['AF','BY','BI','CF','CD','CU','GN','GW','HT','IR','IQ','KP','LA','LB','LY','ML','MM','MZ','NI','PK','RU','SO','SS','SD','SY','TZ','VE','YE','ZW'];
 const CMP_SCHEMES=['DPS','MyDeposits','TDS'];
@@ -651,8 +641,7 @@ const CMP_SCHEMES=['DPS','MyDeposits','TDS'];
 let state={active:'dashboard',brandName:'FallEstateOnboard',
   firm:null,agents:[],clients:[],audit:[],
   ui:{filter:'all',search:'',selectedClientId:null,activeAgentId:null,wizard:null,chat:[],clientSubtab:'overview'},
-  settings:{anthropicKey:'',auditChain:true,autoBroadcast:true},
-};
+  settings:{anthropicKey:'',auditChain:true,autoBroadcast:true}};
 
 const $=(s,p=document)=>p.querySelector(s);
 const $$=(s,p=document)=>Array.from(p.querySelectorAll(s));
@@ -708,8 +697,7 @@ function newClientRec(){
     vulnerable:{identified:false,category:'',details:'',adjustments:''},
     deposit:{amount:0,scheme:'',schemeRef:'',protectedDate:'',returnDue:''},
     documents:[],
-    status:'new',agentId:'',isDemo:false,
-  };
+    status:'new',agentId:'',isDemo:false};
 }
 
 function clientDisplayName(c){return ((c.title?c.title+' ':'')+(c.firstName||'')+' '+(c.lastName||'')).trim()||'Unnamed';}
@@ -719,7 +707,7 @@ function assessAmlRisk(c){
   if(aml.pepStatus){score+=3;reasons.push('PEP');}
   if(!aml.sanctionsChecked){score+=1;reasons.push('sanctions unchecked');}
   const nat=(c.nationality||'').toUpperCase();if(HIGH_RISK_JURIS.includes(nat)){score+=3;reasons.push('high-risk nationality');}
-  if(c.rent>5000){score+=1;reasons.push('high rent >£5k');}
+  if(c.rent>5000){score+=1;reasons.push('high rent >TBAk');}
   if(c.clientType==='buyer'&&c.aml?.sourceOfFunds==='overseas'){score+=2;reasons.push('overseas source');}
   return {grade:score>=5?'high':score>=2?'medium':'low',score,reasons};
 }
@@ -1013,16 +1001,15 @@ function setActiveAgent(id){state.ui.activeAgentId=id;persistUI();toast('Active 
 // Q&A
 const T0_RULES=[
   {q:/aml|money launder|cdd/i,a:'Under MLR 2017, estate and letting agents must conduct CDD for all property transactions where rent is ≥€10,000/year or sale price is any amount. Verify identity (passport/driving licence), verify address (utility bill/bank statement), assess source of funds for buyers, screen sanctions, and check PEP status. Enhanced due diligence for high-risk clients. Report suspicious activity to NCA via SAR.'},
-  {q:/right.?to.?rent|rtr|immigration/i,a:'Immigration Act 2014 requires landlords and their agents to check prospective tenants have the right to rent in the UK before granting a tenancy. Acceptable documents: UK/Irish passport, EU Settlement Scheme status, Biometric Residence Permit, or Home Office online share code. Checks must be done before tenancy starts. For time-limited right, set follow-up check before expiry. Civil penalty for non-compliance: up to £20,000 per occupier.'},
+  {q:/right.?to.?rent|rtr|immigration/i,a:'Immigration Act 2014 requires landlords and their agents to check prospective tenants have the right to rent in the UK before granting a tenancy. Acceptable documents: UK/Irish passport, EU Settlement Scheme status, Biometric Residence Permit, or Home Office online share code. Checks must be done before tenancy starts. For time-limited right, set follow-up check before expiry. Civil penalty for non-compliance: up to TBA per occupier.'},
   {q:/deposit|protect|dps|tds/i,a:'Housing Act 2004 (as amended) requires tenancy deposits for ASTs in England and Wales to be protected in an authorised scheme (DPS, MyDeposits, or TDS) within 30 days of receipt. The prescribed information must be served on the tenant within 30 days. Failure to protect: tenant can claim 1-3x the deposit amount. Cannot serve a valid s.21 notice if deposit not protected.'},
   {q:/referenc|credit|afford|guarantor/i,a:'Tenant referencing typically includes: credit check (adverse credit, CCJs, insolvency), employer reference (confirming employment and salary), previous landlord reference (conduct, rent payment history), and affordability assessment (rent should typically be ≤35-40% of gross income). If affordability is marginal, a guarantor may be required — guarantor income should typically be 3x+ the annual rent.'},
-  {q:/redress|complaint|prs|tpos/i,a:'All property agents in England must belong to a government-approved redress scheme: PRS (The Property Redress Scheme) or TPOS (The Property Ombudsman). Civil penalty up to £5,000 for non-membership. Agents must display membership details prominently. Complaints procedure must be in writing and provided to clients.'},
+  {q:/redress|complaint|prs|tpos/i,a:'All property agents in England must belong to a government-approved redress scheme: PRS (The Property Redress Scheme) or TPOS (The Property Ombudsman). Civil penalty up to TBA for non-membership. Agents must display membership details prominently. Complaints procedure must be in writing and provided to clients.'},
   {q:/cmp|client money|protection/i,a:'Letting agents holding client money (rent, deposits, maintenance funds) must belong to a Client Money Protection (CMP) scheme. Required under the Tenant Fees Act 2019 and Client Money Protection Schemes for Property Agents Regulations 2019. Display CMP certificate prominently. Failure: unlimited fine.'},
-  {q:/fee|tenant fees act/i,a:'Tenant Fees Act 2019 (England) prohibits most fees to tenants. Permitted payments only: rent, tenancy deposit (capped at 5 weeks for rent <£50k/yr), holding deposit (capped at 1 week), early termination (capped at rent owed), and changes to tenancy requested by tenant (capped at £50). Breach: fine up to £30,000 or criminal offence for repeat.'},
+  {q:/fee|tenant fees act/i,a:'Tenant Fees Act 2019 (England) prohibits most fees to tenants. Permitted payments only: rent, tenancy deposit (capped at 5 weeks for rent <TBAk/yr), holding deposit (capped at 1 week), early termination (capped at rent owed), and changes to tenancy requested by tenant (capped at TBA). Breach: fine up to TBA or criminal offence for repeat.'},
   {q:/vulnerab/i,a:'While not FCA-regulated, estate and letting agents should identify vulnerable customers (elderly, disability, language barriers, financial difficulty) and make reasonable adjustments. Document vulnerability, adjustments made, and communication preferences. Consider whether additional support or time is needed for decision-making.'},
   {q:/energy|epc|mees/i,a:'Minimum Energy Efficiency Standards (MEES): rental properties must have EPC rating of E or above. Landlords cannot let a property with F or G rating unless a valid exemption is registered. EPC must be provided to prospective tenants before viewing. Valid for 10 years.'},
-  {q:/sanction|pep/i,a:'Under MLR 2017, agents must screen clients against the HM Treasury sanctions list. PEP (Politically Exposed Person) status requires enhanced due diligence. Sanctions match = report to NCA immediately and do not proceed. PEP = proceed with enhanced scrutiny of source of funds and ongoing monitoring.'},
-];
+  {q:/sanction|pep/i,a:'Under MLR 2017, agents must screen clients against the HM Treasury sanctions list. PEP (Politically Exposed Person) status requires enhanced due diligence. Sanctions match = report to NCA immediately and do not proceed. PEP = proceed with enhanced scrutiny of source of funds and ongoing monitoring.'}];
 function askT0(q){for(const r of T0_RULES){if(r.q.test(q))return {answer:r.a,source:'T0 · estate/letting agent rules'};}return null;}
 async function askT3(q){if(!state.settings.anthropicKey)return null;try{const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'x-api-key':state.settings.anthropicKey,'anthropic-version':'2023-06-01','content-type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,messages:[{role:'user',content:'You are a UK estate and letting agent regulatory expert. Answer concisely.\n\n'+q}]})});if(!res.ok)return null;const json=await res.json();return {answer:json.content?.[0]?.text,source:'T3 · Anthropic'};}catch(e){return null;}}
 
