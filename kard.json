@@ -1,0 +1,29 @@
+{
+  "kind": "kard.v1",
+  "name": "fallestateonboard",
+  "title": "FallEstateOnboard",
+  "retires": "letting agent onboarding",
+  "category": "Property and trades",
+  "license": "MIT",
+  "live": "https://sjgant80-hub.github.io/fallestateonboard/",
+  "repo": "https://github.com/sjgant80-hub/fallestateonboard",
+  "studs": {
+    "brain": {
+      "how": "inline",
+      "version": "3.1.0"
+    },
+    "mesh": {
+      "device": true,
+      "peer": false
+    },
+    "memory": {
+      "indexeddb": true,
+      "localstorage": false
+    },
+    "proof": {
+      "workflows": 1,
+      "tests": 0
+    }
+  },
+  "fits": true
+}
