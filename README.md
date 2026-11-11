@@ -39,4 +39,4 @@ Onboard tenants, buyers, sellers, and landlords with a wizard that adapts by cli
 
 ## Licence
 
-MIT · Simon Gant · prime 887 · ◊·κ=1.
+MIT · Simon Gant.
