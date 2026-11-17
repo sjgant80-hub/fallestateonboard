@@ -19,7 +19,7 @@ Onboard tenants, buyers, sellers, and landlords with a wizard that adapts by cli
 | Type | Tenant / buyer / seller / landlord |
 | Details | Name, DOB, nationality, employer, income |
 | Contact | Phone, email, address |
-| Tenancy | Property, rent, dates, AST type |
+| Tenancy | Property, rent, dates, tenancy type (assured periodic from 1 May 2026) |
 | AML | MLR 2017 CDD — ID, address, source of funds, sanctions, PEP |
 | RTR | Immigration Act 2014 — document type, share code, confirmation |
 | Referencing | Credit, employer ref, landlord ref, affordability, guarantor |
