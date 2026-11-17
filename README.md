@@ -30,10 +30,10 @@ Onboard tenants, buyers, sellers, and landlords with a wizard that adapts by cli
 ### Key rules
 
 - **AML**: MLR 2017 — CDD for property transactions ≥€10k rent/year
-- **RTR**: Immigration Act 2014 — civil penalty up to TBAk per occupier
+- **RTR**: Immigration Act 2014 — civil penalty up to £10k per occupier for a first breach, £20k for a repeat (from 13 Feb 2024)
 - **Deposit**: Housing Act 2004 — protect within 30 days, 1-3x penalty
 - **Tenant Fees Act 2019**: deposit capped at 5 weeks rent
-- **Redress**: PRS or TPOS membership required, TBAk penalty
+- **Redress**: PRS or TPOS membership required, £5k penalty
 
 ---
 
